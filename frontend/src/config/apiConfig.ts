@@ -1,38 +1,42 @@
-// API Configuration with validation
+// api.config.ts
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 if (!API_BASE_URL) {
-  console.warn('NEXT_PUBLIC_API_BASE_URL is not defined. Using default value.');
+  throw new Error(
+    'NEXT_PUBLIC_API_BASE_URL is required but was not provided.'
+  );
 }
 
-const BASE_URL = API_BASE_URL || 'http://localhost:8000';
-
-// Ensure URL has proper format
-const normalizeUrl = (url: string): string => {
-  // Remove trailing slashes
-  let normalized = url.endsWith('/') ? url.slice(0, -1) : url;
-  // Ensure it starts with http:// or https://
-  if (!normalized.startsWith('http://') && !normalized.startsWith('https://')) {
-    normalized = 'http://' + normalized;
+/**
+ * Normalize and validate API base URL
+ * - Must be a valid http/https URL
+ * - Removes trailing slash
+ */
+const normalizeBaseUrl = (url: string): string => {
+  try {
+    const parsed = new URL(url);
+    return parsed.origin; // guarantees protocol + host
+  } catch {
+    throw new Error(`Invalid NEXT_PUBLIC_API_BASE_URL: ${url}`);
   }
-  return normalized;
 };
 
-const normalizedBaseUrl = normalizeUrl(BASE_URL);
+const BASE_URL = normalizeBaseUrl(API_BASE_URL);
 
 export const apiConfig = {
-  baseUrl: normalizedBaseUrl,
+  baseUrl: BASE_URL,
   endpoints: {
     auth: {
-      login: `${normalizedBaseUrl}/api/v1/auth/login`,
-      register: `${normalizedBaseUrl}/api/v1/auth/register`,
-      me: `${normalizedBaseUrl}/api/v1/auth/me`,
-      logout: `${normalizedBaseUrl}/api/v1/auth/logout`,
+      login: `${BASE_URL}/api/v1/auth/login`,
+      register: `${BASE_URL}/api/v1/auth/register`,
+      me: `${BASE_URL}/api/v1/auth/me`,
+      logout: `${BASE_URL}/api/v1/auth/logout`,
     },
     todos: {
-      base: `${normalizedBaseUrl}/api/v1/todos/`,
-      getById: (id: string) => `${normalizedBaseUrl}/api/v1/todos/${id}`,
-      toggle: (id: string) => `${normalizedBaseUrl}/api/v1/todos/${id}/toggle`,
+      base: `${BASE_URL}/api/v1/todos`,
+      getById: (id: string) => `${BASE_URL}/api/v1/todos/${id}`,
+      toggle: (id: string) => `${BASE_URL}/api/v1/todos/${id}/toggle`,
     },
   },
 };

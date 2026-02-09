@@ -36,17 +36,18 @@ export default function LandingPage() {
       <nav className={`sticky top-0 z-50 backdrop-blur-md bg-white/90 border-b border-gray-200 shadow-sm transition-colors duration-300`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 w-10 h-10 rounded-xl flex items-center justify-center shadow-lg">
-                <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="4" y="6" width="24" height="20" rx="3" fill="white" fillOpacity="0.9"/>
-                  <path d="M12 12H20M12 16H18M12 20H16" stroke="#1E3A8A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M8 6V26" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
+            <Link href="/">
+              <div className="flex items-center space-x-3">
+                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 w-10 h-10 rounded-xl flex items-center justify-center shadow-lg">
+                  <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="6" width="24" height="20" rx="3" fill="white" fillOpacity="0.9" />
+                    <path d="M12 12H20M12 16H18M12 20H16" stroke="#1E3A8A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M8 6V26" stroke="white" strokeWidth="2" strokeLinecap="round" />
+                  </svg>
+                </div>
+                <span className="text-xl sm:text-2xl font-bold text-gray-900">Taskory</span>
               </div>
-              <span className="text-xl sm:text-2xl font-bold text-gray-900">Taskory</span>
-            </div>
-
+            </Link>
             <div className="hidden md:flex items-center space-x-8">
               <a href="#features" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Features</a>
               <a href="#how-it-works" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">How It Works</a>
@@ -139,22 +140,22 @@ export default function LandingPage() {
           </div>
 
           {/* Hero Image/Screenshot Placeholder */}
-<div className="relative max-w-4xl mx-auto">
-  <div className="rounded-2xl bg-white border border-gray-200 p-2 shadow-lg">
+          <div className="relative max-w-4xl mx-auto">
+            <div className="rounded-2xl bg-white border border-gray-200 p-2 shadow-lg">
 
-    <div className="aspect-image rounded-xl overflow-hidden bg-gray-100">
-      <Image
-        src="/dashboard-preview.png"
-        alt="Taskory Dashboard Preview"
-        width={1280}
-        height={720}
-        className="w-full h-full object-contain"
-        priority
-      />
-    </div>
+              <div className="aspect-image rounded-xl overflow-hidden bg-gray-100">
+                <Image
+                  src="/dashboard-preview.png"
+                  alt="Taskory Dashboard Preview"
+                  width={1280}
+                  height={720}
+                  className="w-full h-full object-contain"
+                  priority
+                />
+              </div>
 
-  </div>
-</div>
+            </div>
+          </div>
 
         </div>
       </section>
@@ -448,9 +449,9 @@ export default function LandingPage() {
               <div className="flex items-center space-x-3 mb-4">
                 <div className="bg-gradient-to-r from-blue-600 to-indigo-600 w-8 h-8 rounded-lg flex items-center justify-center">
                   <svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="4" y="6" width="24" height="20" rx="3" fill="white" fillOpacity="0.9"/>
-                    <path d="M12 12H20M12 16H18M12 20H16" stroke="#1E3A8A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M8 6V26" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                    <rect x="4" y="6" width="24" height="20" rx="3" fill="white" fillOpacity="0.9" />
+                    <path d="M12 12H20M12 16H18M12 20H16" stroke="#1E3A8A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M8 6V26" stroke="white" strokeWidth="2" strokeLinecap="round" />
                   </svg>
                 </div>
                 <span className="text-lg font-bold text-gray-900">Taskory</span>

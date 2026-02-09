@@ -46,56 +46,28 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
           let bgColor = '';
           let borderColor = '';
           let textColor = '';
-          let icon = null;
+          // let icon = null;
 
           switch (notification.type) {
             case 'success':
               bgColor = 'bg-white border border-green-200';
               borderColor = 'border-green-200';
               textColor = 'text-green-700';
-              icon = (
-                <div className="flex-shrink-0">
-                  <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-              );
               break;
             case 'error':
               bgColor = 'bg-white border border-red-200';
               borderColor = 'border-red-200';
               textColor = 'text-red-700';
-              icon = (
-                <div className="flex-shrink-0">
-                  <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </div>
-              );
               break;
             case 'warning':
               bgColor = 'bg-white border border-yellow-200';
               borderColor = 'border-yellow-200';
               textColor = 'text-yellow-700';
-              icon = (
-                <div className="flex-shrink-0">
-                  <svg className="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                  </svg>
-                </div>
-              );
               break;
             case 'info':
               bgColor = 'bg-white border border-blue-200';
               borderColor = 'border-blue-200';
               textColor = 'text-blue-700';
-              icon = (
-                <div className="flex-shrink-0">
-                  <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-              );
               break;
           }
 
@@ -105,7 +77,6 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
               className={`p-4 rounded-xl shadow-lg flex items-start justify-between animate-slide-down transition-all duration-300 max-w-sm w-full ${bgColor} ${textColor}`}
             >
               <div className="flex items-start space-x-3 flex-1">
-                {icon}
                 <span className="text-sm font-medium flex-1">
                   {notification.message}
                 </span>

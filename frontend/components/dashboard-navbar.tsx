@@ -16,16 +16,18 @@ const DashboardNavbar = () => {
 
           {/* LEFT: Logo + Home */}
           <div className="flex items-center space-x-3">
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 w-10 h-10 rounded-xl flex items-center justify-center shadow-lg">
-              <svg width="20" height="20" viewBox="0 0 32 32" fill="none">
-                <rect x="4" y="6" width="24" height="20" rx="3" fill="white" fillOpacity="0.9" />
-                <path d="M12 12H20M12 16H18M12 20H16" stroke="#1E3A8A" strokeWidth="2" strokeLinecap="round" />
-                <path d="M8 6V26" stroke="white" strokeWidth="2" />
-              </svg>
-            </div>
-            <span className="text-xl sm:text-2xl font-bold text-gray-900">
-              Dashboard
-            </span>
+              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 w-10 h-10 rounded-xl flex items-center justify-center shadow-lg">
+                <svg width="20" height="20" viewBox="0 0 32 32" fill="none">
+                  <rect x="4" y="6" width="24" height="20" rx="3" fill="white" fillOpacity="0.9" />
+                  <path d="M12 12H20M12 16H18M12 20H16" stroke="#1E3A8A" strokeWidth="2" strokeLinecap="round" />
+                  <path d="M8 6V26" stroke="white" strokeWidth="2" />
+                </svg>
+              </div>
+            <Link href="/dashboard">
+              <span className="text-xl sm:text-2xl font-bold text-gray-900">
+                Dashboard
+              </span>
+            </Link>
 
             {/* Home Button */}
             <Button
@@ -93,7 +95,7 @@ const DashboardNavbar = () => {
             <Link href="/dashboard/calendar" className="block py-2 text-gray-700 hover:text-blue-600 font-medium">Calendar</Link>
 
             <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-              
+
               <Button variant="primary" size="md" onClick={logout}>
                 Logout
               </Button>
