@@ -4,6 +4,7 @@ from .api.todos import router as todos_router
 from .api.auth import router as auth_router
 from .core.config import settings
 from .core.database import create_db_and_tables
+from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 from contextlib import asynccontextmanager
 import os
 
@@ -45,6 +46,9 @@ app.add_middleware(
     allow_methods=["*"],  # Allow all methods
     allow_headers=["*"],  # Allow all headers
 )
+
+# Trust proxy headers (Critical for correct URL generation in production)
+app.add_middleware(ProxyHeadersMiddleware, trusted_hosts="*")
 
 # Include API routers
 app.include_router(auth_router)

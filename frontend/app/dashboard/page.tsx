@@ -356,7 +356,7 @@ export default function DashboardPage() {
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <h2 className="text-2xl font-bold text-white mb-2">
-                    Welcome back, {user?.first_name}!
+                    Welcome back, {user?.first_name} {user?.last_name} !
                   </h2>
                   <p className="text-sm !text-blue-100">
                     Here&apos;s what you need to tackle today. You have {highPriorityTasks} high priority tasks.
@@ -579,6 +579,7 @@ export default function DashboardPage() {
                                 {(todo.status || 'todo').split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
                               </span>
                             </div>
+                            
                           </div>
 
                           <div className="flex items-center space-x-1">

@@ -15,7 +15,7 @@ router = APIRouter(prefix=f"{settings.api_v1_prefix}/todos", tags=["todos"])
 # Using centralized dependency from security.py
 
 
-@router.post("/", response_model=TodoRead, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=TodoRead, status_code=status.HTTP_201_CREATED)
 async def create_todo(
     *,
     request: Request,
@@ -46,7 +46,7 @@ async def get_todo(
     return await TodoService.get_todo_by_id(session=session, todo_id=todo_id, user_id=user_id)
 
 
-@router.get("/", response_model=List[TodoRead])
+@router.get("", response_model=List[TodoRead])
 async def get_todos(
     *,
     request: Request,
