@@ -511,7 +511,7 @@ export default function DashboardPage() {
                   {todos.length} {todos.length === 1 ? 'task' : 'tasks'}
                 </span>
               </CardHeader>
-              <CardContent className="p-6">
+              <CardContent className="my-5">
                 {todos.length === 0 ? (
                   <div className="p-12 text-center rounded-xl bg-gray-50 border border-gray-200">
                     <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center mb-4">
