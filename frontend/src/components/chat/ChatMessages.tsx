@@ -6,7 +6,7 @@ import type { Message } from './types';
 type ChatMessagesProps = {
   messages: Message[];
   isLoading: boolean;
-  messagesEndRef: RefObject<HTMLDivElement>;
+  messagesEndRef: RefObject<HTMLDivElement | null>;
 };
 
 const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading, messagesEndRef }) => {

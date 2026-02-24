@@ -6,7 +6,7 @@ import ChatService from '../services/chatService';
 
 interface ChatInterfaceProps {
   onTaskUpdated?: () => void;
-  showNotification?: (type: string, message: string) => void;
+  showNotification?: (type: 'success' | 'error' | 'info' | 'warning', message: string, duration?: number) => void;
 }
 
 // Define the old message type to handle mapping

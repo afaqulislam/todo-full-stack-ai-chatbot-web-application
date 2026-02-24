@@ -10,7 +10,7 @@ import type { Message } from './types';
 interface ChatWidgetProps {
   initialOpen?: boolean;
   onTaskUpdated?: () => void; // Callback to notify parent when a task is updated
-  showNotification?: (type: string, message: string) => void; // Function to show notifications
+  showNotification?: (type: 'success' | 'error' | 'info' | 'warning', message: string, duration?: number) => void; // Function to show notifications
 }
 
 const ChatWidget = ({ initialOpen = false, onTaskUpdated, showNotification }: ChatWidgetProps) => {
@@ -18,7 +18,7 @@ const ChatWidget = ({ initialOpen = false, onTaskUpdated, showNotification }: Ch
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [conversationId, setConversationId] = useState<string | null>(null);
-  const messagesEndRef = useRef<null | HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
