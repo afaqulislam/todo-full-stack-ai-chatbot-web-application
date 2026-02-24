@@ -9,39 +9,59 @@ from contextlib import asynccontextmanager
 
 from .config import settings
 
+import logging
+
 # Get database URL from settings and convert to async format
-# Remove sslmode and channel_binding parameters as they're not supported by asyncpg
 original_url = settings.database_url
-DATABASE_URL = original_url.replace("postgresql://", "postgresql+asyncpg://", 1)
 
-# Parse and clean URL parameters
-if "?" in DATABASE_URL:
-    base_url, query_string = DATABASE_URL.split("?", 1)
-    original_params = query_string.split("&")
+# Check if it's a PostgreSQL URL to convert to async format, otherwise keep as is for SQLite
+if original_url.startswith("postgresql://"):
+    # Remove sslmode and channel_binding parameters as they're not supported by asyncpg
+    DATABASE_URL = original_url.replace("postgresql://", "postgresql+asyncpg://", 1)
 
-    # Filter out unsupported parameters for asyncpg
-    filtered_params = [
-        param for param in original_params
-        if not param.startswith("sslmode=") and not param.startswith("channel_binding=")
-    ]
+    # Parse and clean URL parameters
+    if "?" in DATABASE_URL:
+        base_url, query_string = DATABASE_URL.split("?", 1)
+        original_params = query_string.split("&")
 
-    if filtered_params:
-        DATABASE_URL = f"{base_url}?{'&'.join(filtered_params)}"
-    else:
-        DATABASE_URL = base_url
+        # Filter out unsupported parameters for asyncpg
+        filtered_params = [
+            param for param in original_params
+            if not param.startswith("sslmode=") and not param.startswith("channel_binding=")
+        ]
 
-# Create async engine with connection pooling
-# Enhanced configuration to handle schema changes and prevent cache issues
-engine = create_async_engine(
-    DATABASE_URL,
-    poolclass=AsyncAdaptedQueuePool,
-    pool_size=5,
-    max_overflow=10,
-    pool_pre_ping=True,        # Verify connections before use
-    pool_recycle=300,          # Recycle connections to avoid stale plans
-    pool_reset_on_return='commit',  # Reset connections when returned to pool
-    echo=False                 # Set to True for debugging SQL queries
-)
+        if filtered_params:
+            DATABASE_URL = f"{base_url}?{'&'.join(filtered_params)}"
+        else:
+            DATABASE_URL = base_url
+elif original_url.startswith("sqlite://"):
+    # For SQLite, convert to async format
+    DATABASE_URL = original_url.replace("sqlite://", "sqlite+aiosqlite://", 1)
+else:
+    # For other formats, use as is
+    DATABASE_URL = original_url
+
+logging.info(f"Using database URL: {DATABASE_URL}")
+
+# Configure engine based on database type
+if DATABASE_URL.startswith("sqlite+aiosqlite"):
+    # SQLite configuration
+    engine = create_async_engine(
+        DATABASE_URL,
+        echo=False  # Set to True for debugging SQL queries
+    )
+else:
+    # PostgreSQL configuration with connection pooling
+    engine = create_async_engine(
+        DATABASE_URL,
+        poolclass=AsyncAdaptedQueuePool,
+        pool_size=5,
+        max_overflow=10,
+        pool_pre_ping=True,        # Verify connections before use
+        pool_recycle=300,          # Recycle connections to avoid stale plans
+        pool_reset_on_return='commit',  # Reset connections when returned to pool
+        echo=False                 # Set to True for debugging SQL queries
+    )
 
 # Create async session maker
 AsyncSessionLocal = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)

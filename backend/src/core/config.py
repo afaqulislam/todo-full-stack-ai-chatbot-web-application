@@ -37,11 +37,22 @@ class Settings(BaseSettings):
     api_docs_enabled: bool = True
 
     # =======================
+    # AI MODEL PROVIDER
+    # =======================
+    openrouter_api_key: str = Field(..., alias="OPENROUTER_API_KEY")  # Required
+    openrouter_model_name: str = Field(
+        "arcee-ai/trinity-large-preview", alias="OPENROUTER_MODEL_NAME"
+    )  # Updated to use compatible OpenRouter model
+    openrouter_base_url: str = Field(
+        "https://openrouter.ai/api/v1", alias="OPENROUTER_BASE_URL"
+    )  # Configurable base URL
+
+    # =======================
     # CORS
     # =======================
     backend_cors_origins: Union[List[str], str] = Field(
         default_factory=lambda: ["http://localhost:3000", "http://localhost:8000"],
-        alias="BACKEND_CORS_ORIGINS"
+        alias="BACKEND_CORS_ORIGINS",
     )
 
     @property
@@ -53,21 +64,22 @@ class Settings(BaseSettings):
         """
         if not self.backend_cors_origins:
             return ["http://localhost:3000", "http://localhost:8000"]
-        
+
         # If it's a single string with commas or brackets, try to parse it
         if isinstance(self.backend_cors_origins, str):
             val = self.backend_cors_origins.strip()
-            # If it looks like a JSON list, we might want to json.loads it, 
+            # If it looks like a JSON list, we might want to json.loads it,
             # but simple split is usually enough for comma-separated vals.
             if val.startswith("[") and val.endswith("]"):
                 import json
+
                 try:
                     return json.loads(val)
                 except Exception:
                     pass
-            
+
             return [origin.strip() for origin in val.split(",") if origin.strip()]
-        
+
         # If it's already a list, return it
         return list(self.backend_cors_origins)
 

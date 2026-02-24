@@ -1,7 +1,7 @@
 from sqlmodel import select
 from typing import List, Optional
 from uuid import UUID
-from ..models.todo import Todo, TodoCreate, TodoUpdate, TodoRead, TodoPatch, TodoStatus
+from ..models.todo import Todo, TodoCreate, TodoUpdate, TodoRead, TodoPatch, TodoPriority, TodoStatus
 from ..models.user import User
 from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession

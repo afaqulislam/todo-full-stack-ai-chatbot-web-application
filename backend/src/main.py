@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .api.todos import router as todos_router
 from .api.auth import router as auth_router
+from .api.chat_endpoints import router as chat_router
 from .core.config import settings
 from .core.database import create_db_and_tables
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
@@ -53,6 +54,7 @@ app.add_middleware(ProxyHeadersMiddleware, trusted_hosts="*")
 # Include API routers
 app.include_router(auth_router)
 app.include_router(todos_router)
+app.include_router(chat_router)
 
 
 @app.get("/")

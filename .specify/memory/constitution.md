@@ -1,16 +1,18 @@
 <!--
   Sync Impact Report:
-  - Version change: 0.0.0 → 1.0.0 (Initial project setup)
+  - Version change: 1.0.0 → 2.0.0 (Major - Complete rewrite for AI Chatbot Architecture)
   - List of modified principles:
-      - [PRINCIPLE_1_NAME] → I. Spec-Driven Development (SDD) Rule
-      - [PRINCIPLE_2_NAME] → II. Modern Tech Stack (FastAPI/Next.js)
-      - [PRINCIPLE_3_NAME] → III. JWT-Based Authentication & Security
-      - [PRINCIPLE_4_NAME] → IV. User-Scoped Data Isolation
-      - [PRINCIPLE_5_NAME] → V. Production-Ready Modular Code
-      - [PRINCIPLE_6_NAME] → VI. Backend Test Commitment
+      - Phase II Principles → Phase III AI-Powered Todo Chatbot Principles
+      - I. Spec-Driven Development (SDD) Rule → I. Spec-Driven Development (SDD) Rule
+      - II. Modern Tech Stack (FastAPI/Next.js) → II. FastAPI Backend with SQLModel ORM
+      - III. JWT-Based Authentication & Security → III. Better Auth Authentication with Multi-User Isolation
+      - IV. User-Scoped Data Isolation → IV. Stateless Architecture with Database Persistence
+      - V. Production-Ready Modular Code → V. MCP SDK with Service Layer Integration
+      - VI. Backend Test Commitment → VI. AI Chat Interface with OpenAI Agents SDK
   - Added sections:
-      - Security Requirements
-      - Development Workflow
+      - AI Architecture Requirements
+      - MCP Tool Design Rules
+      - Database Schema Requirements
   - Templates requiring updates:
       - .specify/templates/plan-template.md (✅ updated)
       - .specify/templates/spec-template.md (✅ updated)
@@ -19,41 +21,73 @@
       - TODO(RATIFICATION_DATE): Finalize launch date.
 -->
 
-# Phase II – Todo Full-Stack Web Application Constitution
+# Phase III – AI-Powered Todo Chatbot Constitution
 
 ## Core Principles
 
 ### I. Spec-Driven Development (SDD) Rule
 NO manual coding assumptions are permitted. Every implementation detail, API contract, and business rule MUST be derived from finalized specifications. If an requirement is missing, it must be clarified in the spec before code is written.
 
-### II. Modern Tech Stack (FastAPI/Next.js)
-The application architecture is strictly bounded by:
-- **Backend**: FastAPI + SQLModel + Neon PostgreSQL.
-- **Frontend**: Next.js App Router + TypeScript + Tailwind CSS.
-- Abstractions must align with these framework patterns.
+### II. FastAPI Backend with SQLModel ORM
+The backend architecture is strictly bounded by:
+- **Framework**: FastAPI with production-ready service layer patterns.
+- **Database**: SQLModel ORM with Neon Serverless PostgreSQL.
+- **Architecture**: Stateless server design with no in-memory persistence between requests.
 
-### III. JWT-Based Authentication & Security
-Authentication MUST use Better Auth on the frontend with JWT verification on the backend. Security is non-negotiable; all API routes (except public auth entries) MUST be protected via JWT validation.
+### III. Better Auth Authentication with Multi-User Isolation
+Authentication MUST use Better Auth on the frontend with JWT verification on the backend. Security is non-negotiable; all API routes (except public auth entries) MUST be protected via JWT validation. Multi-user isolation must be strictly enforced at all layers.
 
-### IV. User-Scoped Data Isolation
-Every data operation MUST be user-scoped. Cross-user access is a critical failure. Ownership checks must be enforced at the database/service layer for every request.
+### IV. Stateless Architecture with Database Persistence
+The server must be fully stateless with these requirements:
+- Server MUST be fully stateless.
+- No in-memory conversation storage is allowed.
+- Every request must reload conversation history from database.
+- Conversation state must persist in conversations and messages tables.
+- Violations require refactor before proceeding.
 
-### V. Production-Ready Modular Code
-Code must be modular, highly readable, and project-structured for scalability. Avoid monolithic files; prefer service-oriented patterns and clear separation of concerns between models, schemas, and logic.
+### V. MCP SDK with Service Layer Integration
+MCP tools and AI agents must follow these integration rules:
+- Agent must NEVER access database directly.
+- MCP tools must NEVER access database directly.
+- MCP tools must call existing Task service layer only.
+- No duplication of task business logic is permitted.
+- MCP tools must be stateless with structured JSON responses.
+- Existing Task CRUD endpoints must not be modified.
 
-### VI. Backend Test Commitment
-Tests are mandatory for all backend logic. No backend feature is considered "done" without corresponding unit or integration tests that verify success and error paths.
+### VI. AI Chat Interface with OpenAI Agents SDK
+The AI interface architecture must follow these patterns:
+- Single AI endpoint only: POST /api/{user_id}/chat
+- Frontend must ONLY call chat endpoint.
+- OpenAI Agents SDK for conversation management.
+- OpenAI ChatKit frontend for UI.
+- All components must be independently testable.
 
-## Security Requirements
+## AI Architecture Requirements
 
-- **Ownership Integrity**: Every SQL query filtering by ID must also filter by `user_id`.
-- **Secret Management**: Never hardcode tokens or credentials; use `.env` files and environment variables exclusively.
-- **Input Validation**: All external input must be validated via Pydantic/Zod schemas at the system boundary.
+- **Server State**: Server holds NO runtime memory between requests.
+- **Data Flow**: ChatKit UI → POST /api/{user_id}/chat → Chat Endpoint → OpenAI Agent → MCP Server → Task Service Layer → Neon PostgreSQL
+- **Error Handling**: Error handling must be explicit and consistent.
+- **Production Code**: Code must be production-grade, typed, and clean.
+
+## MCP Tool Design Rules
+
+- MCP tools must be stateless.
+- Tool responses must return structured JSON.
+- MCP tools must call existing Task service layer only.
+- No database access from MCP tools.
+- Follow official MCP SDK patterns.
+
+## Database Schema Requirements
+
+- Conversation state must persist in conversations table.
+- Message history must persist in messages table.
+- Existing Task CRUD tables must remain unchanged.
+- Multi-user isolation at database level required.
 
 ## Development Workflow
 
-1. **Spec**: Define feature and acceptance criteria.
-2. **Plan**: Design architecture and data models.
+1. **Spec**: Define AI chatbot features and acceptance criteria.
+2. **Plan**: Design MCP tools and agent architecture.
 3. **Tasks**: Break into testable, prioritized increments.
 4. **Implement**: Write code and mandatory backend tests.
 5. **Review**: Ensure compliance with this constitution.
@@ -62,4 +96,4 @@ Tests are mandatory for all backend logic. No backend feature is considered "don
 
 This constitution supersedes all other informal practices. Amendments require a version bump and updates to all dependent templates. Compliance is checked during the planning phase of every feature.
 
-**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE) | **Last Amended**: 2026-01-06
+**Version**: 2.0.0 | **Ratified**: TODO(RATIFICATION_DATE) | **Last Amended**: 2026-02-17

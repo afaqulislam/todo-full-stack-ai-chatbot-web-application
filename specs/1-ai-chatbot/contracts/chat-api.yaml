@@ -1,0 +1,124 @@
+openapi: 3.0.0
+info:
+  title: AI Chatbot for Todo Management API
+  description: API for interacting with the AI chatbot to manage todo tasks
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Development server
+  - url: https://api.example.com
+    description: Production server
+paths:
+  /api/{user_id}/chat:
+    post:
+      summary: Process user message and return AI response
+      description: |
+        Process a user message in the context of a conversation and return an AI-generated response.
+        The server is stateless and will load conversation history from the database for each request.
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: The ID of the authenticated user
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - message
+              properties:
+                conversation_id:
+                  type: string
+                  format: uuid
+                  description: Optional existing conversation ID. If not provided, a new conversation is created.
+                message:
+                  type: string
+                  description: The user's message to be processed by the AI
+                  example: "Add a task to buy groceries"
+      responses:
+        '200':
+          description: Successful response from the AI chatbot
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - conversation_id
+                  - response
+                  - tool_calls
+                properties:
+                  conversation_id:
+                    type: string
+                    format: uuid
+                    description: The ID of the conversation
+                  response:
+                    type: string
+                    description: The AI-generated response to the user's message
+                    example: "I've added the task 'buy groceries' to your list."
+                  tool_calls:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Name of the tool that was called
+                        arguments:
+                          type: object
+                          description: Arguments passed to the tool
+                        result:
+                          type: object
+                          description: Result returned by the tool
+        '400':
+          description: Bad request - invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+        '401':
+          description: Unauthorized - invalid or missing authentication
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+        '403':
+          description: Forbidden - user does not have access to this conversation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+      security:
+        - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token obtained from authentication endpoint

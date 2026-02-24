@@ -68,16 +68,14 @@ Currently hardcoded to connect to the backend at `http://localhost:8000`. This c
 ## Folder Structure
 
 ```
-frontend/
-├── app/
-│   ├── auth/
-│   │   ├── login/
-│   │   └── signup/
-│   ├── dashboard/
-│   ├── contexts/
-│   │   └── auth-context.tsx
-│   ├── layout.tsx
-│   └── page.tsx
+frontend/                    # Frontend React application
+    ├── src/                 # Source code
+    │   ├── app/             # Next.js app directory structure
+    │   ├── components/      # Reusable React components
+    │   ├── services/        # API service utilities
+    │   └── config/          # Configuration files
+    │       └── apiConfig.ts # API endpoint configuration
+    └── public/              # Static assets and images
 ```
 
 ## Security Features

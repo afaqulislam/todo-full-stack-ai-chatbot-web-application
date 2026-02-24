@@ -84,9 +84,8 @@ async def login_user(
         )
 
         return {
-            "message": "Login successful", 
-            "user_id": str(user.id),
-            "access_token": access_token
+            "message": "Login successful",
+            "user_id": str(user.id)
         }
     except HTTPException:
         raise

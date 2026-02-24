@@ -57,9 +57,10 @@ BETTER_AUTH_SECRET=your-super-secret-jwt-key-change-in-production
 JWT_ALGORITHM=HS256
 JWT_EXPIRY_DAYS=7
 
-# APPLICATION
-ENV=development
-API_PORT=8000
+# AI MODEL PROVIDER
+OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
+OPENROUTER_API_KEY=your-api-key
+OPENROUTER_MODEL_NAME=your-model-name
 ```
 
 ### Environment Variable Details
@@ -68,8 +69,9 @@ API_PORT=8000
 - `BETTER_AUTH_SECRET`: Secret key for JWT signing (use a strong random key in production)
 - `JWT_ALGORITHM`: Algorithm used for JWT signing (HS256 recommended)
 - `JWT_EXPIRY_DAYS`: Number of days until JWT tokens expire
-- `ENV`: Environment mode (development/production)
-- `API_PORT`: Port to run the API server on
+- `OPENROUTER_BASE_URL`: Base URL for OpenRouter API
+- `OPENROUTER_API_KEY`: API key for OpenRouter
+- `OPENROUTER_MODEL_NAME`: Model name for OpenRouter
 
 ### Getting Credentials
 

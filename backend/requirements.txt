@@ -11,3 +11,16 @@ python-dotenv
 alembic
 asyncpg
 psycopg2-binary
+aiosqlite
+openai>=1.3.5
+google-generativeai>=0.4.0
+httpx
+python-slugify
+aiofiles
+cryptography
+python-dateutil
+sqlalchemy
+pytest
+pytest-asyncio
+fuzzywuzzy
+python-Levenshtein

@@ -1,41 +1,109 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+.ENV
+.ENV.db
+.venv.bak
+env.bak
+venv.bak
+.Pipfile
+.pipenv
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# Python Testing
+.pytest_cache/
+.coverage
+.htmlcov/
+.tox/
+.hypothesis/
 
-# testing
-/coverage
+# Build results
+dist/
+build/
+develop-eggs/
+.installed.cfg
+*.egg-info/
+*.egg
+MANIFEST
+*.spec
 
-# next.js
-/.next/
-/out/
+# Logs
+*.log
+*.log.*
 
-# production
-/build
-
-# misc
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Thumbs.db:encryptable
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment variables
+.env
+.env.local
+.env.dev
+.env.test
+.env.production
+.env.staging
+.env.backup
+
+# Testing
+coverage/
+.htmlcov/
+.cov/
+.nyc_output/
+istanbul/
+.pytest_cache/
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+migrations/
+alembic/
+
+# Python virtual environments and packages
+pip/
+pip-tools/
+pipenv/
+poetry/
+
+# Secrets and keys
+*.key
 *.pem
+*.crt
+*.cert
+*.p12
+*.jks
+*.keystore
+secrets/
+credentials.json
+id_rsa
+id_rsa.pub
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Development
+.pyre/
+.pytype/
+.mypy_cache/
+nbproject/
+site/
+_site/
+docs/_build/
+*.ipynb_checkpoints
+.ipynb_checkpoints/
+**/.ipynb_checkpoints

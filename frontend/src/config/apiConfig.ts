@@ -36,5 +36,8 @@ export const apiConfig = {
       getById: (id: string) => `${BASE_URL}/api/v1/todos/${id}`,
       toggle: (id: string) => `${BASE_URL}/api/v1/todos/${id}/toggle`,
     },
+    chat: {
+      chat: `${BASE_URL}/api/v1/chat`,
+    },
   },
 };
