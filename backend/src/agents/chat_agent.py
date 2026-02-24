@@ -986,6 +986,10 @@ INTEGRATION & AUTONOMY:
 
         except openai.APIError as e:
             # Handle OpenAI API errors specifically
+            print(f"DEBUG: OpenRouter API Error - {str(e)}")
+            print(f"DEBUG: Error Type - {type(e).__name__}")
+            print(f"DEBUG: Model Name - {self.model_name}")
+            # Return user-friendly error message
             return {
                 "response": f"Sorry, I'm having trouble connecting to the AI service right now. Please try again in a moment.",
                 "tool_calls": [],

@@ -14,13 +14,14 @@ const normalizeBaseUrl = (url: string): string => {
   }
 };
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+// const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-// In production (Vercel), we use a relative path to leverage the Next.js rewrite proxy.
-// This ensures cookies are treated as same-origin, fixing authentication issues.
-const BASE_URL = process.env.NODE_ENV === 'production'
-  ? ''
-  : normalizeBaseUrl(API_BASE_URL || 'http://localhost:8000');
+// // In production (Vercel), we use a relative path to leverage the Next.js rewrite proxy.
+// // This ensures cookies are treated as same-origin, fixing authentication issues.
+// const BASE_URL = process.env.NODE_ENV === 'production'
+//   ? ''
+//   : normalizeBaseUrl(API_BASE_URL || 'http://localhost:8000');
 
 export const apiConfig = {
   baseUrl: BASE_URL,
