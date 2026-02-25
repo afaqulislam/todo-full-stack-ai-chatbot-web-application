@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/api/v1/:path*',
-        destination: 'https://afaqulislam-todo-full-stack-web-application-backend.hf.space/api/v1/:path*',
+        destination: 'https://afaqulislam-todo-full-stack-ai-chatbot-web-appli-3149b07.hf.space/api/v1/:path*',
       },
     ];
   },
