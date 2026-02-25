@@ -18,8 +18,8 @@ class Settings(BaseSettings):
     # AUTH / JWT
     # =======================
     better_auth_secret: str = Field(..., alias="BETTER_AUTH_SECRET")
-    jwt_algorithm: str = Field("HS256", alias="JWT_ALGORITHM")
-    jwt_expiry_days: int = Field(7, alias="JWT_EXPIRY_DAYS")  # JWT expiry in days
+    jwt_algorithm: str = Field(..., alias="JWT_ALGORITHM")
+    jwt_expiry_days: int = Field(..., alias="JWT_EXPIRY_DAYS")  # JWT expiry in days
 
     # # =======================
     # # APPLICATION
@@ -41,10 +41,10 @@ class Settings(BaseSettings):
     # =======================
     openrouter_api_key: str = Field(..., alias="OPENROUTER_API_KEY")  # Required
     openrouter_model_name: str = Field(
-        "arcee-ai/trinity-large-preview", alias="OPENROUTER_MODEL_NAME"
+        ..., alias="OPENROUTER_MODEL_NAME"
     )  # Updated to use compatible OpenRouter model
     openrouter_base_url: str = Field(
-        "https://openrouter.ai/api/v1", alias="OPENROUTER_BASE_URL"
+        ..., alias="OPENROUTER_BASE_URL"
     )  # Configurable base URL
 
     # =======================
